@@ -21,7 +21,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static org.hamcrest.Matchers.isA;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
@@ -95,8 +94,10 @@ class BorrowBookServiceTest {
         borrowBookService.borrowBook(borrowBookRequest);
 
         //THEN
-        Assertions.assertThat(userRepository.findById(1L).get().getBorrowedBooks().size()).isEqualTo(2);
-        Assertions.assertThat(bookRepository.findById(3L).get().isBorrowed()).isTrue();
+        User borrowUser = userRepository.findById(1L).orElseThrow();
+        Book borrowedBook = bookRepository.findById(2L).orElseThrow();
+        Assertions.assertThat(borrowUser.getBorrowedBooks().size()).isEqualTo(2);
+        Assertions.assertThat(borrowedBook.isBorrowed()).isTrue();
         Assertions.assertThat(bookRepository.findAll().stream().anyMatch(Book::isBorrowed)).isTrue();
         Assertions.assertThat(bookRepository.findAll().stream().anyMatch(Book::isBorrowed)).isTrue();
 
