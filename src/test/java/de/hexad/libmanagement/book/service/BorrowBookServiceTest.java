@@ -95,7 +95,7 @@ class BorrowBookServiceTest {
 
         //THEN
         User borrowUser = userRepository.findById(1L).orElseThrow();
-        Book borrowedBook = bookRepository.findById(2L).orElseThrow();
+        Book borrowedBook = bookRepository.findById(3L).orElseThrow();
         Assertions.assertThat(borrowUser.getBorrowedBooks().size()).isEqualTo(2);
         Assertions.assertThat(borrowedBook.isBorrowed()).isTrue();
         Assertions.assertThat(bookRepository.findAll().stream().anyMatch(Book::isBorrowed)).isTrue();
