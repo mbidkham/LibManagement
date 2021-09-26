@@ -27,7 +27,7 @@ public class BookService {
     }
 
     public PaginatedFindBooksResponse getAllBooks(int page, int size) {
-        Page<Book> books = bookRepository.findAllByBorrowedUserIsNull(PageRequest.of(page, size));
+        Page<Book> books = bookRepository.findAllByBorrowedIsFalse(PageRequest.of(page, size));
         List<BookDto> bookList = books.stream().map(book -> modelMapper.map(book, BookDto.class)).collect(Collectors.toList());
 
         return PaginatedFindBooksResponse.builder()

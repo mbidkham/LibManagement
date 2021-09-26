@@ -11,6 +11,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     Page<Book> findAll(Pageable pageable);
 
-    Page<Book> findAllByBorrowedUserIsNull(Pageable pageable);
+    Page<Book> findAllByBorrowedIsFalse(Pageable pageable);
 
 }

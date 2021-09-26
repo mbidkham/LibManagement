@@ -1,18 +1,19 @@
 package de.hexad.libmanagement.model.entity;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Book {
 
     @Id
@@ -20,12 +21,11 @@ public class Book {
 
     private boolean borrowed;
 
-    @OneToOne()
-    @JoinColumn(name = "USER_ID")
-    private User borrowedUser;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cloned_book_id")
+    private Book clonedBook;
 
     @NotNull
     private String name;
-
 
 }

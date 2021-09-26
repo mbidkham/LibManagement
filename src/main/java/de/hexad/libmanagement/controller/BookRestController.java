@@ -2,6 +2,7 @@ package de.hexad.libmanagement.controller;
 
 import de.hexad.libmanagement.dto.BookDto;
 import de.hexad.libmanagement.dto.PaginatedFindBooksResponse;
+import de.hexad.libmanagement.model.repository.UserRepository;
 import de.hexad.libmanagement.service.BookService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageImpl;
@@ -18,6 +19,9 @@ import javax.validation.Valid;
 public class BookRestController {
 
     private final BookService bookService;
+
+    private final UserRepository userRepository;
+
 
     @GetMapping("/books")
     public ResponseEntity<PageImpl<BookDto>> getAllBooks(
