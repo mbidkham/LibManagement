@@ -23,7 +23,7 @@ public class Book {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cloned_book_id")
-    private Book clonedBook;
+    private Book parentBook;
 
     @NotNull
     private String name;

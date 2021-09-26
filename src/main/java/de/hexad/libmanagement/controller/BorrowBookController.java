@@ -10,7 +10,7 @@ import javax.validation.Valid;
 
 @RestController
 @AllArgsConstructor
-public class ReserveBookController {
+public class BorrowBookController {
 
     private final BorrowBookService borrowBookService;
 
@@ -19,4 +19,11 @@ public class ReserveBookController {
         borrowBookService.borrowBook(borrowBookRequest);
         return ResponseEntity.ok("You have Borrowed the book successfully:)");
     }
+
+    @PutMapping("/borrow-copy")
+    public ResponseEntity<String> borrowBookCopy(@RequestBody @Valid BorrowBookRequest borrowBookRequest){
+        borrowBookService.borrowCopyBook(borrowBookRequest);
+        return ResponseEntity.ok("You have Borrowed the copy of the book successfully:)");
+    }
+
 }

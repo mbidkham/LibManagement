@@ -2,7 +2,6 @@ package de.hexad.libmanagement.book.controller;
 
 
 import de.hexad.libmanagement.LibManagementApplication;
-import de.hexad.libmanagement.common.DataUtil;
 import de.hexad.libmanagement.model.entity.Book;
 import de.hexad.libmanagement.model.entity.User;
 import de.hexad.libmanagement.model.repository.*;
@@ -59,7 +58,7 @@ class BookRestControllerTest {
 
     }
     @Test
-    void testWhenThereIsOneBookToView() throws Exception {
+    void testWhenThereAreMoreThanOneBookToView() throws Exception {
 
         bookRepository.save(borrowedBook);
         userRepository.save(user);
@@ -67,8 +66,8 @@ class BookRestControllerTest {
 
         mockMvc.perform(get("/books"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.content", hasSize(1)))
-                .andExpect(jsonPath("$.totalElements").value(1))
+                .andExpect(jsonPath("$.content", hasSize(2)))
+                .andExpect(jsonPath("$.totalElements").value(2))
                 .andExpect(jsonPath("$.totalPages").value(1))
                 .andExpect(jsonPath("$.content[0].name").value("A Fraction of the whole!"));
 

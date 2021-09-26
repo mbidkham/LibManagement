@@ -18,10 +18,12 @@ public class ExceptionHandlerService extends ResponseEntityExceptionHandler {
             BorrowBookException ex) {
         RestApiMessage apiMessage = ex.getRestApiMessage();
         switch (apiMessage) {
-            case USER_NOT_FOUND:
             case BOOK_NOT_FOUND:
+            case NOT_COPY_EXIST:
+            case USER_NOT_FOUND:
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiMessage.getValue());
             case BOOK_IS_BORROWED:
+            case DUPLICATE_CLONE_OF_BOOK:
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiMessage.getValue());
             default:
                 logger.error(DEFAULT_MESSAGE + ex.getMessage());
